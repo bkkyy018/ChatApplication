@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import { UserContext } from './UserContext';
 import Home from './pages/Home';
-import Login from './pages/Login';
 import { Outlet } from 'react-router-dom';
 function App() {
   const [count, setCount] = useState(23);
