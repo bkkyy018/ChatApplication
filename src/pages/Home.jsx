@@ -1,12 +1,8 @@
 import React from "react";
-import { useContext } from "react";
-import { UserContext } from "../UserContext";
 import SideBar from "../components/SideBar";
 import ChatLayOut from "../components/ChatLayOut";
 
 function Home() {
-    const { count } = useContext(UserContext);
-
   return (
    <>
    <div className=" min-w-full min-h-screen bg-gray-700 flex justify-center">

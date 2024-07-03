@@ -1,13 +1,13 @@
 import { useState } from 'react'
 import { UserContext } from './UserContext';
-import Home from './pages/Home';
 import { Outlet } from 'react-router-dom';
 function App() {
-  const [count, setCount] = useState(23);
+  const [user, setUser] = useState("")
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
   return (
     <>
-    <UserContext.Provider value={{count,setCount}}>
-      <Home/>
+    <UserContext.Provider value={{user, setUser,email, setEmail,password, setPassword}}>
       <Outlet/>
     </UserContext.Provider>
     </>

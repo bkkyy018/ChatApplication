@@ -1,4 +1,5 @@
 import React from "react";
+import { NavLink } from "react-router-dom";
 
 function Navbar() {
   return (
@@ -13,7 +14,7 @@ function Navbar() {
           alt="dp"
         />
         <span>Johnnn</span>
-        <button className=" hover:text-yellow-600 cursor-pointer text-yellow-500 bg-indigo-800 rounded-md p-1 ">Logout</button>
+        <NavLink to="signup" className=" hover:text-yellow-600 cursor-pointer text-yellow-500 bg-indigo-800 rounded-md p-1 " >Logout</NavLink>
       </div>
     </div>
   );
