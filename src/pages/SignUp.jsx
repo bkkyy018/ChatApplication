@@ -74,15 +74,21 @@ function SignUp() {
              required
            />
          </div>
-         {/* <div>
+         <div>
            <input
-             className=" w-[290px] h-[37px] rounded-md placeholder:px-7 bg-blue-900 ring-1 ring-gray-400 "
-             type="text"
+            //  className=" w-[290px] h-[37px] rounded-md placeholder:px-7 bg-blue-900 ring-1 ring-gray-400 appearance-none"
+            className=' hidden'
+             type="file"
              placeholder="Confirm Password"
-             id="Conpswd"
+             id="file"
              required
            />
-         </div> */}
+           <label htmlFor="file" className=' flex gap-4 items-center justify-start ml-2 cursor-pointer'>
+            <img src="src/assets/addAvatar.png" alt="add_avatar" width="40px" height="40px" />
+            <span>Add Avatar</span>
+            
+           </label>
+         </div>
          <div>
            <button
              type="submit"

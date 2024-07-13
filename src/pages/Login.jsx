@@ -9,7 +9,7 @@ function Login() {
   const handleLogin=async (e)=>{
     e.preventDefault()
     try{
-      await signInWithEmailAndPassword(auth,email.password)
+      await signInWithEmailAndPassword(auth,email,password)
       console.log("Sign up Successfully")
       // window.location.href='./login'
     }
@@ -17,7 +17,6 @@ function Login() {
     {
         console.log(error)
     }
-  
   }
   return (
       <div className=" flex justify-center ">

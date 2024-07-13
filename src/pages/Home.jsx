@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import SideBar from "../components/SideBar";
 import ChatLayOut from "../components/ChatLayOut";
+import { UserContext } from "../UserContext";
 
 function Home() {
+  
   return (
    <>
    <div className=" min-w-full min-h-screen bg-gray-700 flex justify-center">
