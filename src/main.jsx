@@ -1,14 +1,9 @@
-import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App.jsx";
 import "./index.css";
 
 import Home from "./pages/Home.jsx";
-import {
-  Route,
-  Routes,
-  BrowserRouter,
-} from "react-router-dom";
+import { Route, Routes, BrowserRouter } from "react-router-dom";
 import SignUp from "./pages/SignUp.jsx";
 import Login from "./pages/Login.jsx";
 // const router = createBrowserRouter([
@@ -43,16 +38,15 @@ import Login from "./pages/Login.jsx";
 //   )
 // )
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <React.StrictMode>
-    {/* <RouterProvider router={router} /> */}
+  <>
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<App/>}>
+        <Route path="/" element={<App />}>
           <Route path="" element={<Home />} />
           <Route path="signup" element={<SignUp />} />
-          <Route path="login" element={<Login/>} />
+          <Route path="login" element={<Login />} />
         </Route>
       </Routes>
     </BrowserRouter>
-  </React.StrictMode>
+  </>
 );

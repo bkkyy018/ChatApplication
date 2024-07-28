@@ -1,7 +1,5 @@
-import React, { useContext } from "react";
 import SideBar from "../components/SideBar";
 import ChatLayOut from "../components/ChatLayOut";
-import { UserContext } from "../UserContext";
 
 function Home() {
   

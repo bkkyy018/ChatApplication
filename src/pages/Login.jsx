@@ -1,17 +1,17 @@
-import React, { useContext } from 'react'
+import  { useContext } from 'react'
 import { UserContext } from '../UserContext';
 import { NavLink } from 'react-router-dom';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../components/firebase';
 
 function Login() {
-  const {email, setEmail,password, setPassword}=useContext(UserContext)
+  const {email, setEmail,password, setPassword,navigate}=useContext(UserContext)
   const handleLogin=async (e)=>{
     e.preventDefault()
     try{
       await signInWithEmailAndPassword(auth,email,password)
-      console.log("Sign up Successfully")
-      // window.location.href='./login'
+      console.log("Login up Successfully")
+      navigate('/')
     }
     catch(error)
     {
@@ -67,7 +67,7 @@ function Login() {
               </div>
               <div>
                 <nav>
-                  If don't have an account please
+                  If dont have an account please
                   <NavLink
                     to="/signup"
                     className=" text-red-600 p-2 rounded-md hover:text-red-800"
