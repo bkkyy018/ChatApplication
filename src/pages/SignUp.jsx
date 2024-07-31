@@ -1,53 +1,60 @@
 import { useContext, useEffect } from "react";
 import { UserContext } from "../UserContext";
-import { NavLink} from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { auth, db, storage } from "../components/firebase";
-import { createUserWithEmailAndPassword, onAuthStateChanged, updateProfile } from "firebase/auth";
 import {
-  ref,
-  uploadBytesResumable,
-  getDownloadURL,
-} from "firebase/storage";
+  createUserWithEmailAndPassword,
+  onAuthStateChanged,
+  updateProfile,
+} from "firebase/auth";
+import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { doc, setDoc } from "firebase/firestore";
 
 function SignUp() {
-  const { user, setUser, email, setEmail, password, setPassword,navigate } =
+  const { user, setUser, email, setEmail, password, setPassword, navigate } =
     useContext(UserContext);
 
-    /*navigate is a hook use to navigate different router*/
+  /*navigate is a hook use to navigate different router*/
 
   const HandleRegister = async (e) => {
     e.preventDefault();
-     const displayName = e.target[0].value;
+    const displayName = e.target[0].value;
     const email = e.target[1].value;
     const password = e.target[2].value;
-     const file = e.target[3].files[0];
+    const file = e.target[3].files[0];
+
     try {
-      await createUserWithEmailAndPassword(auth, email, password);
+      await createUserWithEmailAndPassword(auth, email, password)
+        .then((data) => console.log("user", data))
+        .catch((err) => console.log("Error in CREATION OF USER ", err.message));
+
       const user = auth.currentUser;
-       console.log(user);
-      console.log("signin succesfully");
+      console.log("User : ", user);
+
       const storageRef = ref(storage, displayName);
       /*storageRef is a referance to a specific location in firebase it allow upload , download and deleting  ## the functions are -->>  (uploadBytes,getDownloadURL,deleteObject)  */
 
-      await uploadBytesResumable(storageRef, file).then(() => {
+      await uploadBytesResumable(storageRef, file).then(async () => {
         /*uploadBytesResumable is a function provided by Firebase Storage that allows you to upload files to Firebase Storage with the ability to pause, resume, and monitor the progress of the upload. */
-        getDownloadURL(storageRef).then(async (downloadURL) => {
+        await getDownloadURL(storageRef).then(async (downloadURL) => {
           /*getDownloadURL is a function provided by Firebase Storage that allows you to retrieve the download URL for a file stored in your Firebase Storage bucket. */
           try {
-            //Update profile
+            // Update profile
             await updateProfile(user, {
               displayName,
               photoURL: downloadURL,
             });
-            //create user on firestore
-            await setDoc(doc(db, "users",user.uid), {
-              uid:user.uid,
+            // create user on firestore
+            await setDoc(doc(db, "users", user.uid), {
+              uid: user.uid,
               displayName,
               email,
               photoURL: downloadURL,
             });
-            await setDoc(doc(db, "UserChats", user.uid), {});
+             await setDoc(doc(db, "UserChats", user.uid), {});
+
+            console.log("USER  ::::", user);
+            console.log("Yes done");
             navigate("/login");
           } catch (err) {
             console.log(err);
@@ -58,16 +65,20 @@ function SignUp() {
       console.log(error);
     }
   };
-  const {currentUser,setCurrentUser}=useContext(UserContext);
+  const { currentUser, setCurrentUser } = useContext(UserContext);
+
   useEffect(() => {
     const unsub = onAuthStateChanged(auth, (user) => {
-      setCurrentUser(user)
-      console.log(user)
+      setCurrentUser(user);
+
+      console.log(user);
     });
+
     return () => {
       unsub();
     };
-  },[currentUser]);
+  }, [currentUser]);
+
   return (
     <>
       <div className=" flex justify-center ">
@@ -78,7 +89,6 @@ function SignUp() {
             </h2>
             <form
               onSubmit={HandleRegister}
-              action=""
               className=" grid grid-row-6 grid-flow-row space-y-6 mt-5 text-white"
             >
               <div>

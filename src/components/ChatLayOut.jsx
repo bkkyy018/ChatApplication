@@ -1,26 +1,34 @@
-import React from "react";
 import Messages from "./Messages";
 import Input from "./Input";
+import { useContext } from "react";
+import { UserContext } from "../UserContext";
 function ChatLayOut() {
+  const { data } = useContext(UserContext);
+  const z = Object.entries(data)[0][1];
   return (
     <>
       <div className=" col-span-2 flex flex-col">
         <div className=" ChatInfo flex justify-between items-center h-[7%] bg-slate-800 relative">
-          <div className=" text-white ml-4 font-bold text-xl">Johnnn</div>
+          <div className=" text-white ml-4 font-bold text-xl">
+            {!z ? "Unknown" : z?.displayName}
+          </div>
           <div className=" flex  items-center mr-5 gap-3 h-[30px] ">
-            <img className=" cursor-pointer"
+            <img
+              className=" cursor-pointer"
               src="src/assets/cam.png"
               alt="cam"
               height="30px"
               width="30px"
             />
-            <img className=" cursor-pointer"
+            <img
+              className=" cursor-pointer"
               src="src/assets/add.png"
               alt="add"
               height="30px"
               width="30px"
             />
-            <img className=" cursor-pointer"
+            <img
+              className=" cursor-pointer"
               src="src/assets/more.png"
               alt="more"
               height="30px"
@@ -32,10 +40,10 @@ function ChatLayOut() {
           <Messages />
         </div>
         <div className=" ">
-          <Input/>
+          <Input />
         </div>
       </div>
     </>
-  ); 
+  );
 }
 export default ChatLayOut;
