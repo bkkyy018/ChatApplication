@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { UserContext } from "../UserContext";
 
 // eslint-disable-next-line react/prop-types
-const Contact=({name,img,data,lastMsg})=>{
+const Contact=({name,img,data,lastMsg,lstMsgTime})=>{
   const {dispatch}=useContext(UserContext);
   const handleSelect=(dt)=>{
     dispatch({type:"CHANGE_USER",payload:dt})
@@ -17,10 +17,12 @@ const Contact=({name,img,data,lastMsg})=>{
             src={img}
             alt="contact"
           />
+
           <div className="flex items-center flex-col ">
             <h2 className=" font-semibold" >{name}</h2>
             <span>{lastMsg}</span>
           </div>
+          <span className=" ml-28">{lstMsgTime}</span>
         </div>
       </div>
     </>

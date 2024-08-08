@@ -21,13 +21,13 @@ function Messages() {
     console.log(data.chatID)
   }, [data.chatID]);
   console.log(messages[0]);
+  console.log(messages);
   return (
     <>
       <div className=" h-[35rem] overflow-y-scroll">
       {messages?.map((msg)=>{
        return <Message msg={msg} key={msg?.id} />
       })}  
-      {/* <Message/> */}
       </div>
     </>
   );

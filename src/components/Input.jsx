@@ -1,6 +1,6 @@
 import  { useContext, useState } from "react";
 import { UserContext } from "../UserContext";
-import { arrayUnion, doc, serverTimestamp, Timestamp, updateDoc } from "firebase/firestore";
+import { arrayUnion, doc, Timestamp, updateDoc } from "firebase/firestore";
 import { db, storage } from "./firebase";
 import { v4 as uuid } from "uuid";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
@@ -34,25 +34,28 @@ function Input() {
       console.log("img Done")
     } else {
       try{
+        const date=new Date();
+        const dateNow=date.toLocaleTimeString().substring(0,5);
+        console.log(dateNow)
       await updateDoc(doc(db,"chats", data.chatID), {
         messages: arrayUnion({
           id: uuid(),
           text,
           senderId: currentUser.uid,
-          date: Timestamp.now(),
+          date: dateNow,
         }),      
       });
     await updateDoc(doc(db,"UserChats",currentUser.uid),{
       [data.chatID+".lastMessage"]:{
         text
       },
-     [data.chatID+".date"]:serverTimestamp(),
+     [data.chatID+".date"]:dateNow,
     })
     await updateDoc(doc(db,"UserChats",data.user.uid),{
       [data.chatID+".lastMessage"]:{
         text
       },
-     [data.chatID+".date"]:serverTimestamp(),
+     [data.chatID+".date"]:dateNow,
     })
   }
     catch(error)

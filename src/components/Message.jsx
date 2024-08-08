@@ -18,7 +18,7 @@ function Message(message) {
             src={message.senderId===currentUser.uid?data.user.photoURL:currentUser.photoURL}
             alt=""
           />
-          <span>just now</span>
+          <span>{message?.msg.date}</span>
         </div>
         
         <div className=" messageContent  p-2  flex  text-white flex-col-reverse gap-3 place-items-end float-left">

@@ -24,7 +24,7 @@ function Contacts() {
   return (
     <>
       {contactLL?.sort((a,b)=>(b[1].date-a[1].date)).map((item) => (
-        <Contact key={item[0]} name={item[1].userInfo.displayName} img={item[1].userInfo.photoURL} data={item[1].userInfo} lastMsg={item[1].lastMessage?.text} />
+        <Contact key={item[0]} name={item[1].userInfo.displayName} img={item[1].userInfo.photoURL} data={item[1].userInfo} lastMsg={item[1].lastMessage?.text} lstMsgTime={item[1]?.date} />
       ))}
     </>
   );
